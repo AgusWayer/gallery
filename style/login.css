@@ -1,0 +1,94 @@
+body{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	overflow: hidden;
+}
+input:focus{
+	outline: 0;
+}
+.card-container{
+	background-color: rgba(255,255,255,.2);
+	border-radius: 30px;
+	backdrop-filter: blur(50px) ;
+	box-shadow: 0 5px 20px rgba(0,0,0,.1);
+}
+.color{
+	content: "";
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	position: absolute;
+	z-index: -1;
+}
+
+.color:nth-child(2) {
+	top: -10px;
+	right: 0;
+	scale: 150%;
+	filter: blur(60px);
+	background-color: #D04848;
+	animation: animate1 3s infinite alternate-reverse;
+}
+.color:nth-child(3) {
+	top: 50px;
+	left: -10px;
+	scale: 150%;
+	filter: blur(60px);
+	background-color: #492E87;
+	animation: animate2 3s infinite alternate-reverse;
+}
+.color:nth-child(4) {
+	bottom: -100px;
+	margin: 0 auto;
+	scale: 150%;
+	filter: blur(60px);
+	background-color: #43766C;
+}
+img{
+
+}
+.login-btn{
+	outline: 1px solid #43766C;
+	border: 0;
+	padding: 0px 30px;
+	background-color: transparent;
+	color:  #43766C;
+}
+.title{
+	color:  #43766C;
+}
+.login-btn:hover{
+	color: white;
+	background-color: #43766C;
+}
+.side{
+	background-color: #43766C;
+	border-radius: 30px 30px 0 30px;
+
+}
+.fa-eye{
+	cursor: pointer;
+}
+
+@keyframes animate1{
+	0% {
+		right: 0;
+		top: -10px;
+	}
+	100% {
+		right: 80px;
+		top: -100px;
+	}
+}
+@keyframes animate2{
+	0% {
+		top: 50px;
+		left: -10px;
+	}
+	100% {
+		top: 150px;
+		left: -60px;
+	}
+}
