@@ -1,15 +1,14 @@
 <div class=" my-3">
-	<h3 class="text-center">Welcome, Agus Wira!</h3>
+	<h3 class="text-center">What's New Today!</h3>
 	<p class="text-center">Let's Discover something new here!</p>
-	<div class="category">
-		<div></div>
-	</div>
 	<div class="grid mx-auto my-3">
 		<?php 
 		$i = 0;
-		while($i < 20){
+		while($i < 3){
 			?>
-		
+		<div class="collection">
+			<h4>Art</h4>
+		</div>
 		<div class="grid-item">
 				<div class="content-container">
 					<a href="./image.php?id=">
