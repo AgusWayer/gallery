@@ -3,3 +3,12 @@
 	height: 40px;
 
 }
+.navbar.active{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 9;
+}
+.navbar{
+	transition: 1s;
+}

@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="./style/topbar.css">
-<div class="navbar navbar-expand-md bg-white">
+<div class="navbar navbar-expand-md bg-white" id="navbar">
 	<div class="container">
 		<div class="logo">
 			<a href="./index.php" class="text-decoration-none text-black fw-bold fs-5">Deezz</a>
@@ -8,7 +8,6 @@
 			<div class="navbar-nav">
 				<span class="nav-item"><a href="./index.php" class="nav-link">Home</a></span>
 				<span class="nav-item"><a href="./discover.php" class="nav-link">Discover</a></span>
-				<span class="nav-item"><a href="./collections.php" class="nav-link">Collections</a></span>
 			</div>
 		</div>
 		<div class="d-flex align-items-center ">
@@ -33,6 +32,6 @@
 			</div>
 		</div>
 	</div>
-	
-	
 </div>
+
+<script type="text/javascript" src="./script/topbar.js"></script>

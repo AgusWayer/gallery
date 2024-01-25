@@ -1,0 +1,49 @@
+.avatar img{
+	width: 150px;
+	border-radius: 100%;
+	height: 150px;
+	object-fit: cover;
+	object-position: center;
+}
+.edit-button{
+	background-color: rgba(0, 0, 0, .2);
+}
+.album-container{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 10px;
+}
+.album-wrapper{
+	height: 100%;
+	overflow: hidden;
+}
+.section-wrapper{
+	overflow: hidden;
+	width: fit-content;
+}
+.section-wrapper:hover .overlay{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.2);
+	position: absolute;
+}
+.section-wrapper{
+
+}
+.left-side img{
+	object-fit: cover;
+	height: 12rem;
+	size: 90%;
+}
+.right-side .col-12{
+	height: 6rem;
+	overflow: hidden;
+}
+.right-side img{
+	object-fit: cover;
+	object-position: center;
+}
+.detail-pin {
+	font-size: 12px;
+}
