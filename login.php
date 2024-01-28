@@ -25,7 +25,24 @@ if(isset($_SESSION['user'])){
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<p>Username atau Password Salah!</p>
+						<p>Password Salah!</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php }else if(isset($_GET['msg']) && $_GET['msg'] == '102'){?>
+		<div class="modal fade" id="modalMsg">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						Message
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Password Salah!</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -79,11 +96,46 @@ if(isset($_SESSION['user'])){
 						</div>
 					</div>
 					<div class="text-center my-4">
-						<button type="submit" name="register_2" class="rounded-pill login-btn fw-semibold py-2">Create Account</button>
+						<button type="submit" name="register_2" class="rounded-pill login-btn fw-semibold py-2">Next</button>
 					</div>
 				</form>
-				<?php } ?>
+				<?php }else if(isset($_GET['page']) && $_GET['page'] == 3){?>
+					<?php if(isset($_GET['page']) && isset($_GET['msg']) && $_GET['msg'] == 202){?>
+						<div class="modal fade" id="modalMsg">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										Message
+										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<p>Password Salah!</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
+				<form action="utilities/login.php" method="POST" enctype="multipart/form-data">
+					<div>
+						<label for="profile" class="mb-2 fw-semibold container-upload-image text-center">
+							<div>
+								<div class="">
+									<i class="fa-solid fa-upload text-secondary fs-1"></i>
 
+								</div>
+								<p class="text-secondary mt-3 fs-3">Upload Profile!</p>
+							</div>
+						</label>
+						<input type="file" name="profile" class="d-none" id="profile">
+					</div>
+					<div class="text-center my-4">
+						<button type="submit" name="register_3" class="rounded-pill login-btn fw-semibold py-2">Submit</button>
+					</div>
+				</form>
+		<?php } ?>
 			</div>
 		<?php }else{?>
 			<aside class="w-50 side text-end pe-2 d-flex justify-content-end">

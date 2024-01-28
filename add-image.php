@@ -15,17 +15,55 @@
 </head>
 <body>
 	<?php require "components/topbar.php"; ?>
+	<?php if(isset($_GET['msg']) && $_GET['msg'] == '201'){
+		?>
+		<div class="modal fade" id="modalMsg">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						Message
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Bukan Merupakan Image!</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php }else if(isset($_GET['msg']) && $_GET['msg'] == '202'){?>
+		<div class="modal fade" id="modalMsg">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						Message
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>Size Image Melebihi 5 Mb!</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
 	<div class=" w-75 mx-auto">
 		<div class="">
 				<div class="row">
-					<div class="upload-container col-6 d-flex justify-content-center align-items-center">
+					<div class="upload-container col-6 d-flex justify-content-center align-items-center" id="upload-container" >	
+						
 						<label for="photo" id="photoLabel" class="w-75 p-3 h-75 d-flex justify-content-center align-items-center photo-upload flex-column text-secondary">
+
 							<i class="fa-solid fa-upload fs-3"></i>
 							<h3>Upload a Photo</h3>
 						</label>
 					</div>
 					<div class="col-6">
-					<form class="w-75">
+					<form class="w-75" action="utilities/image.php" method="POST" enctype="multipart/form-data">
 						<div class="my-4">
 							<label class="d-block mb-2 fs-5 fw-bold">Judul Foto</label>
 							<input type="text" name="judulfoto" class="form-control ">
@@ -41,21 +79,24 @@
 							</select>
 						</div>
 						<div class="my-4 text-center">
-							<button class="btn btn-danger rounded-pill px-4 py-2">Submit</button>
+							<button name="add-image" class="btn btn-danger rounded-pill px-4 py-2">Submit</button>
 						</div>
-						<input type="file" id="photo" name="photo" class="d-none" >
+						<input type="file" id="photo" name="photo" hidden onchange="previewImage('photo','preview','upload-container')">
+						<input type="text" name="userid" value="<?= $_SESSION['user']['id'] ?>" hidden>
 					</form>
 					</div>
 				</div>
 			
 		</div>
 	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="script/image.js"></script>
 	<script type="text/javascript">
-		const photo = document.getElementById("photo")
-		if(photo){
-			console.log(photo);
-		}
-		
+		$(window).on('load',()=>{
+			$('#modalMsg').modal('show')
+			
+		})
 		// if(photo){
 		// 	console.log(photo.value)
 		// }

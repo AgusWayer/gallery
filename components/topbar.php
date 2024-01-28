@@ -19,9 +19,9 @@
 			</div>
 			<div class="profile">
 				<a href="./profile.php?id=">
-					<?php if(isset($_SESSION['user']))	{
+					<?php if(isset($_SESSION['user']['profile']))	{
 					?>
-						<img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-circle">
+						<img src="profile/<?= $_SESSION['user']['profile']?>" class="rounded-circle">
 					<?php
 					}else{?>
 						<img src="./assets/no-profile.webp" class="rounded-circle">

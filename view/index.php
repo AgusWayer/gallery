@@ -1,7 +1,7 @@
 <div class=" my-3">
 	<h3 class="text-center"><?php 
 	if(isset($_SESSION['user'])){
-		echo "Welcome, ".$_SESSION['user'];
+		echo "Welcome, ".$_SESSION['user']['username'];
 	}else{
 		echo "Hello";
 	}; ?></h3>
