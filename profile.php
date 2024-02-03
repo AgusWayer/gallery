@@ -1,6 +1,9 @@
-<?php session_start(); 
+<?php 
+require "utilities/connect.php";
+session_start(); 
 if(!isset($_SESSION['user'])){
 	header("location: ./login.php");
+	
 }
 ?>
 <!DOCTYPE html>
@@ -21,33 +24,42 @@ if(!isset($_SESSION['user'])){
 	<div class="container-fluid">
 		<div class="my-3 text-center">
 			<div class="avatar text-center mb-2">
-				<img src="<?php if(!isset($_SESSION['user'])){
-					echo "assets/no-profile.webp";
-				} else{
-					echo "assets/suguru.jpeg";
-				}?>">
+				<?php
+					$userid = $_GET['id'];
+					$query = mysqli_query($conn,"SELECT * FROM USER WHERE userid =$userid");
+					if(mysqli_num_rows($query)){
+						foreach($query as $user){
+				?>
+						<img src="./profile/<?= $user['profile'] ?>">
+						<h2 class=" "><?= $user['namalengkap'] ?></h2>
+						<p class=" text-secondary"><?= $user['email'] ?></p>
+				<?php 
+						}
+					}?>
 			</div>
-			<h2 class=" ">Agus Wira</h2>
-			<p class=" text-secondary">aguswira@gmail.com</p>
-			<p class="">1K Followers</p>
+			<?php 
+				if($_SESSION['user']['id'] == $_GET['id']){
+				?>
 			<div class="">
-				<a href="" class="btn edit-button fw-semibold rounded-pill py-2 px-4">Edit Profil</a>
+				<a href="./edit-profil.php?id=<?= $_SESSION['user']['id'] ?>" class="btn edit-button fw-semibold rounded-pill py-2 px-4">Edit Profil
+				</a>
+				
 				<a href="utilities/login.php?action=logout" class="btn fw-semibold rounded-pill py-2 px-4 btn-danger">Log Out</a>
+				
 			</div>
+			<?php
+				} ?>
 		</div>
 		<div class="my-4">
 			<div class="d-flex justify-content-center">
-				<a href="./profile.php?view=created" class="text-decoration-none text-black me-5 <?php if(isset($_GET['view']) && $_GET['view'] == 'created'){echo "border-bottom border-black";} ?>"><h5>Created</h5></a>
-				<a href="./profile.php?view=saved" class=" text-decoration-none text-black <?php if(isset($_GET['view']) && $_GET['view'] == 'saved'){echo "border-bottom border-black";}else if(!isset($_GET['view'])){echo "border-bottom border-black";} ?>"><h5>Saved</h5></a>
+				<a href="./profile.php?view=created&id=<?=$userid ?>" class=" text-decoration-none text-black <?php if(isset($_GET['view']) && $_GET['view'] == 'created'){echo "border-bottom border-black";}else if(!isset($_GET['view'])){echo "border-bottom border-black";} ?>"><h5>Created</h5></a>
 			</div>
 			<div>
 				<?php
-					if(isset($_GET['view']) && $_GET['view']=="saved"){
-						require("view/saved.php");
-					}else if(isset($_GET['view']) && $_GET['view'] == "created"){
+				 if(isset($_GET['view']) && $_GET['view'] == "created"){
 						require("view/created.php");
 					}else{
-						require("view/saved.php");
+						require("view/created.php");
 					}
 				 ?>
 			</div>

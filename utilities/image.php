@@ -4,7 +4,7 @@
 		$fotoid = rand(1000,2000);
 		$judulfoto = htmlspecialchars($_POST['judulfoto']);
 		$deskripsifoto = htmlspecialchars($_POST['deskripsifoto']);
-		$tanggalunggah = date();
+		$tanggalunggah = date("Y-m-d");
 		$albumid = htmlspecialchars($_POST['album']);
 		$userid= htmlspecialchars($_POST['userid']);
 		$foto_name = $_FILES['photo']['name'];
@@ -17,9 +17,10 @@
 		$directory = "../image/".$foto_name;
 		if(in_array($foto_type,$types_allowed)){
 			if($size < 3000000){
+				move_uploaded_file($tmp_name,$directory);
 				$query = "INSERT INTO foto values (?,?,?,?,?,?,?)";
 				$stmt = $conn->prepare($query);
-				$stmt->bind_param("issdsii",$fotoid,$judulfoto,$deskripsifoto,$tanggalunggah,$directory,$albumid,$userid);
+				$stmt->bind_param("issssii",$fotoid,$judulfoto,$deskripsifoto,$tanggalunggah,$foto_name,$albumid,$userid);
 				if($stmt->execute()){
 					header("location: ../index.php?msg=205");
 				}
@@ -29,6 +30,14 @@
 			}
 		}else{
 			header("location: ../add-image.php?msg=201");
+		}
+	}
+	
+	if(isset($_GET['action']) && isset($_GET['id']) && $_GET['action'] == 'delete'){
+		$fotoid = $_GET['id'];
+		$query = mysqli_query($conn,"DELETE FROM foto WHERE fotoid = $fotoid");
+		if($query){
+			header("location: ../index.php?msg=501");
 		}
 	}
  ?>

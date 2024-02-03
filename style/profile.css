@@ -47,3 +47,14 @@
 .detail-pin {
 	font-size: 12px;
 }
+
+.container-add-album{
+	width: 70px;
+	height: 70px;
+	font-size: 35px;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	z-index: 9;
+	margin: 20px;
+}

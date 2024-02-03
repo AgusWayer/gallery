@@ -120,7 +120,7 @@ if(isset($_SESSION['user'])){
 					<?php } ?>
 				<form action="utilities/login.php" method="POST" enctype="multipart/form-data">
 					<div>
-						<label for="profile" class="mb-2 fw-semibold container-upload-image text-center">
+						<label for="profile" class="mb-2 fw-semibold container-upload-image text-center" id="upload-containerx">
 							<div>
 								<div class="">
 									<i class="fa-solid fa-upload text-secondary fs-1"></i>
@@ -129,7 +129,7 @@ if(isset($_SESSION['user'])){
 								<p class="text-secondary mt-3 fs-3">Upload Profile!</p>
 							</div>
 						</label>
-						<input type="file" name="profile" class="d-none" id="profile">
+						<input type="file" name="profile" class="d-none" id="profile" onchange="previewImage('profile','preview','upload-container')">
 					</div>
 					<div class="text-center my-4">
 						<button type="submit" name="register_3" class="rounded-pill login-btn fw-semibold py-2">Submit</button>
@@ -175,6 +175,7 @@ if(isset($_SESSION['user'])){
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="script/login.js"></script>
+	<script src="script/image.js"></script>
 	<script type="text/javascript">
 		$(window).on('load',()=>{
 			$('#modalMsg').modal('show')

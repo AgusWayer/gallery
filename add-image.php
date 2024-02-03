@@ -1,8 +1,10 @@
 <?php 
+	require "utilities/connect.php";
 	session_start();
 	if(!isset($_SESSION['user'])){
 		header("location: ./login.php");
 	}
+	$userid = $_SESSION['user']['id'];
  ?>
 <!DOCTYPE html>
 <html>
@@ -73,9 +75,17 @@
 							<textarea name="deskripsifoto" rows="4"   class="form-control "></textarea>
 						</div>
 						<div class="my-4">
-							<select name="album" class="form-control ">
+							<select name="album" class="form-control " required>
 								<option hidden selected>Album</option>
-								<option value="1">Anime</option>
+							<?php 
+							$selectAlbum = mysqli_query($conn,"SELECT album.albumid,album.namaalbum from album INNER JOIN user on album.userid = user.userid WHERE user.userid = $userid");
+							if(mysqli_num_rows($selectAlbum)){
+								foreach($selectAlbum as $album){
+							 ?>
+								
+								<option value="<?= $album['albumid'] ?>"><?= $album['namaalbum'] ?></option>	
+							<?php } 
+							} ?>
 							</select>
 						</div>
 						<div class="my-4 text-center">
@@ -87,7 +97,7 @@
 					</div>
 				</div>
 			
-		</div>
+		</div>	
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

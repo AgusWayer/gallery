@@ -14,11 +14,8 @@
 			<div class="search">
 				<a href="./index.php?view=search" class="nav-link fs-5 pe-3 "><i class="fa-solid fa-magnifying-glass"></i></a>
 			</div>
-			<div class="notif">
-				<a href="./index.php?view=notification" class="nav-link fs-5 pe-3 "><i class="fa-solid fa-bell"></i></a>
-			</div>
 			<div class="profile">
-				<a href="./profile.php?id=">
+				<a href="./profile.php?id=<?=$_SESSION['user']['id'] ?>">
 					<?php if(isset($_SESSION['user']['profile']))	{
 					?>
 						<img src="profile/<?= $_SESSION['user']['profile']?>" class="rounded-circle">

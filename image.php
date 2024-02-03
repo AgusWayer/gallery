@@ -1,3 +1,13 @@
+<?php 
+	session_start();
+	require "utilities/connect.php"; 
+	if(isset($_GET['id'])){
+		$fotoid = $_GET['id'];
+		$userid = $_SESSION['user']['id'];
+		$query = mysqli_query($conn,"SELECT * FROM foto WHERE fotoid = $fotoid");
+		if(mysqli_num_rows($query)){
+			foreach($query as $foto){
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,14 +24,15 @@
 	<div class="container my-3 shadow rounded-5 position-relative">
 		<div class="row">
 			<div class="col-6 p-0">
-				<img src="assets/suguru.jpeg" class="w-100">
+				<img src="./image/<?=$foto['lokasifile'] ?>" class="w-100">
 			</div>
 			<div class="col-6 p-4 position-relative">
 				<section class="text-end">
 					<button class="btn me-3" onclick="handleCategory()">Category <i class="fa-solid fa-chevron-down ms-2"></i></button>
 					<a href="" class="btn btn-danger rounded-pill px-4 py-2">Save</a>
 				</section>
-				<h1>Suguru Geto</h1>
+				<h1><?= $foto['judulfoto'] ?></h1>
+				<p><?= $foto['deskripsifoto'] ?></p>
 				<!-- add category -->
 				<div class="category-container p-3 rounded-4 text-center position-relative">
 					<div class="position-absolute end-0 text-end top-0 p-3">
@@ -91,28 +102,33 @@
 				<!-- add category end -->
 
 				<!-- profile  -->
+				<?php 
+					$ambilUser = mysqli_query($conn,"SELECT user.userid,user.username,user.profile from user inner join foto on user.userid = foto.userid WHERE foto.fotoid = $fotoid");
+					if(mysqli_num_rows($ambilUser)){
+						foreach($ambilUser as $user){
+					
+					?>
 				<div class="row my-4">
 					<div class="col-2">
-						<a href="mx-0 p-0">
-							<img src="assets/suguru.jpeg" class="img-profile">
+						<a href="./profile.php?id=<?= $user['userid'] ?>" class="mx-0 p-0">
+							<img src="./profile/<?=$user['profile'] ?>" class="img-profile">
 						</a>
 					</div>	
 					<div class="col-7 text-start">
 						<div class="d-block mx-0">
-							<h5 class="mb-0">Nama</h5>
-							<p>1,5k Follower</p>
+							<h5 class="mb-0"><?= $user['username'] ?></h5>
 						</div>
 					</div>
-					<div class="col-3">
-						<a href="" class="btn fw-semibold rounded-pill follow-btn px-4 py-2 ">Follow</a>
-					</div>
 				</div>
+			<?php }
+			} ?>
 				<!-- profile end -->
-
 				<!-- comment start -->
 				<div class="comment">
 					<h5 class="fw-semibold">Comments</h5>
+					
 					<div class="comment-container">
+						
 						<div class="comment-wrapper row my-3">
 							<div class="col-2">
 								<a href="">
@@ -132,33 +148,48 @@
 								</div>
 							</div>
 						</div>
+						
 					</div>
 				</div>
 				<!-- comment end -->
 				<div class="upload-comment ">
 					<div class="d-flex justify-content-between ">
-						<h5>4 Comment</h5>
-						<div class="d-flex align-items-center">
-							<span class="d-flex align-items-center me-3">
-								<i class="fa-solid fa-heart fs-4 me-2"></i>
-								<h5 class="m-0">86</h5>
-							</span>
-							<a href="./image.php?id=&action=like-image" class="fs-4 btn"><i class="fa-regular fa-heart"></i></a>
-						</div>
+						<?php 
+						$ambilComment = mysqli_query($conn,"SELECT COUNT(komentarfoto.komentarid) as jumlahkomen FROM komentarfoto INNER JOIN foto ON komentarfoto.fotoid = foto.fotoid INNER JOIN user ON komentarfoto.userid = user.userid WHERE komentarfoto.fotoid = $fotoid AND komentarfoto.userid = $userid");
+						if(mysqli_num_rows($ambilComment)){
+							foreach($ambilComment as $comment){
+						 ?>
+						<h5><?= $comment['jumlahkomen'] ?> Comment</h5>
+						<?php 
+							}
+						}
+						 ?>
 					</div>
 					<div class="row py-1 align-items-center	">
+						<?php 
+						if(mysqli_num_rows($ambilUser)){
+							foreach ($ambilUser as $user) {
+						 ?>
 						<div class="col-2">
 							<a href="">
-								<img src="assets/suguru.jpeg" class="img-profile">
+								<img src="./profile/<?= $user['profile'] ?>" class="img-profile">
 							</a>
 						</div>
 						<div class="col-10">
-							<form method="POST">
+							<form method="POST" action="utilities/comment.php" class="d-flex w-100">
+								<input type="number" hidden name="fotoid" value="<?= $fotoid ?>">
+								<input type="number" hidden name="userid" value="<?= $userid ?>">
 								<div>
-									<input type="text" name="comment" placeholder="Tambahan Komentar" class="form-control rounded-pill py-2 px-4">
+									<input type="text" name="isikomentar" placeholder="Tambahan Komentar" class="form-control rounded-pill py-2 px-4 w-">
+								</div>
+								<div>
+									<button type="submit" name="submit-comment" class="btn ms-3"> <i class="fa-solid fa-paper-plane"></i></button>
 								</div>
 							</form>
 						</div>
+					<?php
+						}
+					 } ?>
 					</div>
 				</div>
 			</div>
@@ -173,3 +204,7 @@
 	</script>
 </body>
 </html>
+<?php 
+		}
+	}
+} ?>
