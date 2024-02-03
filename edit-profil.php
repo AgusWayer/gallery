@@ -8,7 +8,6 @@
 	$getUser = mysqli_query($conn,"SELECT * FROM user WHERE userid = $userid");
 	if(mysqli_num_rows($getUser)){
 		foreach ($getUser as $user) {
-		
 ?>
 
 <!DOCTYPE html>
@@ -25,33 +24,45 @@
 <body>
 	<?php require 'components/topbar.php'; ?>
 	<div class="container">
-		<div class="row ">
-			<div class="col-6 text-center">
-				<img src="./profile/<?= $_SESSION['user']['profile'] ?>" class="rounded-circle image-profile ">
+		<form action="utilities/login.php" method="POST">
+			<div class="row ">
+				<div class="col-6 text-center wrapper">
+					<div class="img-container position-relative mx-auto">
+						<div class="edit-profile-pict text-white">
+							<label for="profile" class=" p-0 fw-bold"><i class="fa-solid fa-pen"></i> Edit Profile</label>
+							<input type="file" hidden name="profile" id="profile" onchange>
+						</div>
+						<img src="./profile/<?= $_SESSION['user']['profile'] ?>" class="w-100 h-100 image-profile" id="profile-pict">
+					</div>
+				</div>
+				<div class="col-6">
+					<h5 class="text-center">Edit Your Profile</h5>
+					<form>
+						<div class="mt-4">
+							<label for="username" class="fw-bold">Username</label>
+							<input type="text" name="username" class="form-control" id="username" value="<?= $user['username'] ?>">
+						</div>
+						<div class="mt-4">
+							<label for="alamat" class="fw-bold">Password</label>
+							<input type="text" name="alamat" class="form-control" id="alamat" value="<?= $user['namalengkap'] ?>">
+						</div>
+						<div class="mt-4">
+							<label for="namalengkap" class="fw-bold">Nama Lengkap</label>
+							<input type="text" name="namalengkap" class="form-control" id="namalengkap" value="<?= $user['namalengkap'] ?>">
+						</div>
+						<div class="mt-4">
+							<label for="alamat" class="fw-bold">Alamat</label>
+							<input type="text" name="alamat" class="form-control" id="alamat" value="<?= $user['namalengkap'] ?>">
+						</div>
+						<div class="mt-4 text-center">
+							<button class="btn btn-danger px-4 py-2 rounded-pill fw-semibold">Save</button>
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="col-6">
-				<h5 class="text-center">Edit Your Profile</h5>
-				<form>
-					<div>
-						<label for="username" class="fw-bold">Username</label>
-						<input type="text" name="username" class="form-control" id="username" value="<?= $user['username'] ?>">
-					</div>
-					<div>
-						<label for="email" class="fw-bold">Email</label>
-						<input type="email" name="email" class="form-control" id="email" value="<?= $user['email'] ?>">
-					</div>
-					<div>
-						<label for="namalengkap" class="fw-bold">Nama Lengkap</label>
-						<input type="text" name="namalengkap" class="form-control" id="namalengkap" value="<?= $user['namalengkap'] ?>">
-					</div>
-					<div>
-						<label for="alamat" class="fw-bold">Alamat</label>
-						<input type="text" name="alamat" class="form-control" id="alamat" value="<?= $user['namalengkap'] ?>">
-					</div>
-				</form>
-			</div>
-		</div>
+		</form>
 	</div>
+	<script src="script/image.js"></script>
 </body>
 </html>		
 <?php 

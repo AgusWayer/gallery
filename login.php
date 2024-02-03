@@ -120,7 +120,7 @@ if(isset($_SESSION['user'])){
 					<?php } ?>
 				<form action="utilities/login.php" method="POST" enctype="multipart/form-data">
 					<div>
-						<label for="profile" class="mb-2 fw-semibold container-upload-image text-center" id="upload-containerx">
+						<label for="profile" class="mb-2 fw-semibold container-upload-image text-center" id="upload-container">
 							<div>
 								<div class="">
 									<i class="fa-solid fa-upload text-secondary fs-1"></i>

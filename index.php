@@ -26,8 +26,6 @@
 	<?php 
 	if(!$view){
 		require"view/index.php";
-	}else if($view == "search"){
-		echo "search";
 	}
 	?>
 	<?php if(isset($_GET['msg']) && $_GET['msg'] == 501){?>

@@ -1,5 +1,25 @@
 .image-profile{
+	object-fit: cover;
+}
+.img-container{
 	width: 300px;
 	height: 300px;
-	object-fit: cover;
+	border-radius: 100%;
+	overflow: hidden;
+	border: 10px solid #81689D;
+}
+
+.edit-profile-pict{
+	display: none;
+	background-color: rgba(0, 0, 0, .6);
+	padding: 15px 0;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+.img-container:hover .edit-profile-pict{
+	display: block;
+}
+.edit-profile-pict label{
+	cursor: pointer;
 }

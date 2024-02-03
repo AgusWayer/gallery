@@ -40,4 +40,12 @@
 			header("location: ../index.php?msg=501");
 		}
 	}
+	if(isset($_POST['search-image'])){
+		$search = $_POST['search'];
+		if($search){
+			header("location: ../index.php?search=$search");
+		}else{
+			header("location: ../index.php");
+		}
+	}
  ?>

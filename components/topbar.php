@@ -1,19 +1,19 @@
 <link rel="stylesheet" type="text/css" href="./style/topbar.css">
 <div class="navbar navbar-expand-md bg-white" id="navbar">
-	<div class="container">
+	<div class="container ">
 		<div class="logo">
 			<a href="./index.php" class="text-decoration-none text-black fw-bold fs-5">Deezz</a>
 		</div>
-		<div class="">
-			<div class="navbar-nav">
-				<span class="nav-item"><a href="./index.php" class="nav-link">Home</a></span>
-				<span class="nav-item"><a href="./discover.php" class="nav-link">Discover</a></span>
-			</div>
+		<div class="input-search w-50">
+			<form action="utilities/image.php" method="POST">
+				<div class="form-control px-2 py-1 rounded-pill d-flex justify-content-center align-items-center">
+					<input type="text" name="search" class="w-100 border-0 px-2">
+					<button class="btn" type="submit" name="search-image"><i class="fa-solid fa-magnifying-glass "></i></button>
+				</div>
+				
+			</form>
 		</div>
 		<div class="d-flex align-items-center ">
-			<div class="search">
-				<a href="./index.php?view=search" class="nav-link fs-5 pe-3 "><i class="fa-solid fa-magnifying-glass"></i></a>
-			</div>
 			<div class="profile">
 				<a href="./profile.php?id=<?=$_SESSION['user']['id'] ?>">
 					<?php if(isset($_SESSION['user']['profile']))	{

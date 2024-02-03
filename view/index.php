@@ -1,4 +1,10 @@
-<?php require"./utilities/connect.php"; ?>
+<?php require"./utilities/connect.php"; 
+	$query = 'SELECT * FROM foto';
+	if(isset($_GET['search'])){
+		$search = $_GET['search'];
+		$query = "SELECT * FROM foto WHERE judulfoto LIKE '%$search'" ;
+	}
+?>
 <div class=" my-3">
 	<h3 class="text-center"><?php 
 	if(isset($_SESSION['user'])){
@@ -54,9 +60,9 @@
 	</div>
 	<div class="grid mx-auto my-3">
 		<?php 
-		$query = mysqli_query($conn,"SELECT * FROM foto");
-		if(mysqli_num_rows($query)){
-			foreach ($query as $foto) {
+		$getFoto = mysqli_query($conn,$query);
+		if(mysqli_num_rows($getFoto)){
+			foreach ($getFoto as $foto) {
 			?>
 		<div class="grid-item">
 				<div class="content-container">
